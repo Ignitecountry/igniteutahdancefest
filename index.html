@@ -69,50 +69,26 @@
   STRUCTURED DATA (JSON-LD) — makes Google show a rich result
   (date, location, ticket link) directly in search results.
 ============================================================ -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "DanceEvent",
-  "name": "Utah Dance Fest 2026 — The Hunger Games",
-  "description": "Utah's premier country swing and line dance convention. Four days of workshops, competitions, and nightly social dances.",
-  "startDate": "2026-09-17T16:00:00",
-  "endDate": "2026-09-20T23:00:00",
-  "eventStatus": "https://schema.org/EventScheduled",
-  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-  "location": {
-    "@type": "Place",
-    "name": "Utah Dance Fest",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "106 West 5600 North",
-      "addressLocality": "Provo",
-      "addressRegion": "UT",
-      "postalCode": "84604",
-      "addressCountry": "US"
-    }
-  },
-  "image": "pics/logo.png",
-  "url": "https://igniteutahdancefest.com",
-  "organizer": {
-    "@type": "Organization",
-    "name": "Ignite Country Fusion",
-    "url": "https://igniteutahdancefest.com"
-  },
-  "offers": {
-    "@type": "Offer",
-    "name": "All Access Event Pass",
-    "price": "165",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/LimitedAvailability",
-    "url": "https://www.danceplace.com/book/it/15853",
-    "validFrom": "2026-01-01"
-  },
-  "performer": {
-    "@type": "Organization",
-    "name": "Ignite Country Fusion"
-  }
-}
-</script>
+<script type="application/ld+json"> { "@context": "https://schema.org", 
+  "@type": "Event",
+  "name": "Utah Dance Fest 2026 — The Hunger Games", 
+  "startDate": "2026-09-17T16:00:00-06:00", 
+  "endDate": "2026-09-20T23:00:00-06:00",
+  "eventStatus": "https://schema.org/EventScheduled", 
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode", 
+  "location": { "@type": "Place", "name": "Utah Dance Fest", 
+  "address": { "@type": "PostalAddress",
+  "streetAddress": "106 West 5600 North",
+  "addressLocality": "Provo", "addressRegion": "UT", 
+  "postalCode": "84604", "addressCountry": "US" } },
+  "image": "https://igniteutahdancefest.com/pics/logo.png",
+  "url": "https://igniteutahdancefest.com/", 
+  "offers": { "@type": "Offer",
+  "url": "https://www.danceplace.com/book/it/15853",
+  "price": "165", "priceCurrency": "USD", 
+  "availability": "https://schema.org/LimitedAvailability" },
+  "organizer": { "@type": "Organization", "name": "Ignite Country Fusion",
+  "url": "https://igniteutahdancefest.com/" } } </script>
  <style>
 
 /* ============================================================
