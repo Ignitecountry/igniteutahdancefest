@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+/* ============================================================
+THEME CONFIG — swap these variables each year to retheme!
+============================================================
+2026 Theme: Hunger Games
+Fonts: Cinzel Decorative (headline), Cinzel (subhead), Raleway (body)
+Next year: swap --theme-gold, --theme-accent, fonts, --theme-hero-tagline
+============================================================ */
+:root{
+--g:#C9A84C; --gl:#E8C96B; --gd:#8B6914;
+--dark:#0A0905; --char:#1A1710; --mid:#2A2418;
+--red:#8B1A1A; --fire:#E8441A;
+--txt:#F0E6CC; --muted:#A89060;
+--hf:'Cinzel Decorative',serif;
+--bf:'Cinzel',serif;
+--sf:'Raleway',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--txt);font-family:var(--sf);font-weight:300;line-height:1.7;overflow-x:hidden}
+
+/* ---- NAV ---- */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;display:flex;align-items:center;justify-content:space-between;padding:1rem 3rem;transition:background .3s,border .3s}
+nav.scrolled{background:rgba(10,9,5,.97);border-bottom:1px solid rgba(201,168,76,.2)}
+.nav-logo{font-family:var(--hf);font-size:.9rem;color:var(--g);text-decoration:none;display:flex;align-items:center;gap:.6rem}
+.nav-logo img{height:36px;width:auto}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{font-family:var(--bf);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--g)}
+.nav-cta{background:var(--g)!important;color:var(--dark)!important;padding:.45rem 1.2rem;font-weight:700!important}
+.nav-cta:hover{background:var(--gl)!important}
+
+/* Hamburger */
+.nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.4rem}
+.nav-hamburger span{display:block;width:24px;height:2px;background:var(--g);transition:all .3s}
+.nav-hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.nav-hamburger.open span:nth-child(2){opacity:0}
+.nav-hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* Mobile nav drawer */
+.nav-mobile{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,9,5,.98);z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+.nav-mobile.open{display:flex}
+.nav-mobile a{font-family:var(--bf);font-size:1.1rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-mobile a:hover{color:var(--g)}
+.nav-mobile .nav-cta{background:var(--g);color:var(--dark);padding:.6rem 2rem;font-weight:700}
+
+/* ---- BUTTONS ---- */
+.btn-p{display:inline-block;padding:.9rem 2.4rem;background:var(--g);color:var(--dark);font-family:var(--bf);font-size:.78rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:all .25s;border:none;cursor:pointer}
+.btn-p:hover{background:var(--gl);transform:translateY(-2px)}
+.btn-s{display:inline-block;padding:.9rem 2.4rem;border:1px solid rgba(201,168,76,.5);color:var(--g);font-family:var(--bf);font-size:.78rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:all .25s;background:none;cursor:pointer}
+.btn-s:hover{border-color:var(--g);background:rgba(201,168,76,.08);transform:translateY(-2px)}
+
+/* ---- SECTION BASE ---- */
+section{padding:5.5rem 2rem;position:relative}
+.si{max-width:1100px;margin:0 auto}
+.ey{font-family:var(--bf);font-size:.65rem;letter-spacing:.4em;text-transform:uppercase;color:var(--g);margin-bottom:.8rem}
+.st{font-family:var(--hf);font-size:clamp(1.7rem,4vw,2.8rem);color:var(--gl);line-height:1.1;margin-bottom:1.2rem}
+.dv{width:60px;height:1px;background:var(--g);opacity:.45;margin:1.2rem auto}
+.center{text-align:center}
+
+/* ember particles */
+.embers{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+.ember{position:absolute;bottom:-10px;border-radius:50%;animation:float-up linear infinite;opacity:0}
+@keyframes float-up{0%{transform:translateY(0) translateX(0) scale(1);opacity:.9}50%{opacity:.5;transform:translateY(-45vh) translateX(var(--dx)) scale(.7)}100%{transform:translateY(-95vh) translateX(calc(var(--dx)*1.5)) scale(.2);opacity:0}}
+
+/* fire ring */
+.fire-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:680px;height:680px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(201,168,76,.1) 0%,rgba(139,26,26,.15) 30%,rgba(139,26,26,.05) 55%,transparent 70%);animation:pr 4s ease-in-out infinite;pointer-events:none;z-index:0}
+@keyframes pr{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.7}50%{transform:translate(-50%,-50%) scale(1.07);opacity:1}}
+
+/* ---- HERO ---- */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 6rem;overflow:hidden;background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('pics/shimmer.png');background-size:cover;background-position:center;background-repeat:no-repeat}
+.hero-content{position:relative;z-index:2}
+.h-ey{font-family:var(--bf);font-size:1.5rem;letter-spacing:.45em;text-transform:uppercase;color:var(--g);margin-bottom:1.5rem;animation:fi 1s ease .2s both}
+.h-t1{font-family:var(--hf);font-size:clamp(2.8rem,7vw,5.5rem);line-height:1.05;color:var(--gl);text-shadow:0 0 80px rgba(201,168,76,.5),0 4px 20px rgba(0,0,0,.8);margin-bottom:.4rem;animation:fi 1s ease .4s both}
+.h-t2{font-family:var(--hf);font-size:clamp(1.1rem,2.5vw,1.9rem);color:var(--red);letter-spacing:.08em;margin-bottom:2rem;animation:fi 1s ease .6s both}
+.h-tag{font-family:var(--bf);font-style:italic;font-size:1.5rem;color:var(--muted);letter-spacing:.1em;margin-bottom:3rem;animation:fi 1s ease .8s both}
+.h-badge{display:inline-flex;flex-direction:column;align-items:center;border:1px solid rgba(201,168,76,.4);padding:1.1rem 2.8rem;margin-bottom:2.8rem;animation:fi 1s ease 1s both}
+.h-badge .dl{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--g);margin-bottom:.25rem}
+.h-badge .dm{font-family:var(--bf);font-size:1.35rem;color:var(--txt);letter-spacing:.07em}
+.h-badge .dloc{font-size:1rem;color:var(--muted);letter-spacing:.2em;margin-top:.15rem}
+.h-btns{display:flex;gap:1.1rem;flex-wrap:wrap;justify-content:center;animation:fi 1s ease 1.2s both}
+@keyframes fi{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.scroll-arrow{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);animation:bounce 2s ease infinite;color:var(--g);font-size:1.4rem;cursor:pointer;z-index:2}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+
+
+/* ---- COUNTDOWN ---- */
+.cd-sec{background:var(--char);border-top:1px solid rgba(201,168,76,.084);border-bottom:1px solid rgba(201,168,76,.15);padding:2.8rem 2rem}
+.cd-grid{display:flex;gap:2rem;justify-content:center;flex-wrap:wrap}
+.cd-unit{text-align:center;min-width:80px}
+.cd-num{font-family:var(--hf);font-size:5rem;color:var(--g);line-height:1;display:block}
+.cd-lbl{font-size:.62rem;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+.cd-sep{font-family:var(--hf);font-size:2.5rem;color:rgba(201,168,76,.25);align-self:center;padding-bottom:.4rem}
+
+/* ---- ABOUT ---- */
+.about-sec{background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('pics/flames.jpg');background-size:cover;background-position:center;background-repeat:no-repeat}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.about-frame{border:1px solid rgba(201,168,76,.28);padding:2.5rem 2rem;position:relative}
+.about-frame::before{content:'';position:absolute;top:-8px;left:-8px;right:8px;bottom:8px;border:1px solid rgba(201,168,76,.1);pointer-events:none}
+.sn{font-family:var(--hf);font-size:2.4rem;color:var(--g);display:block}
+.sd{font-size:.82rem;color:var(--muted)}
+.si-stat{margin-bottom:1.8rem}
+.about-text p{color:rgba(240,230,204,.8);margin-bottom:1.1rem;font-size:.93rem}
+
+/* fire torch divider */
+.torch-div{display:flex;align-items:center;gap:1.2rem;margin-bottom:.6rem}
+.tl{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.28),transparent)}
+.tf{font-size:1.3rem}
+
+/* ---- EXPERIENCES ---- */
+.exp-sec{background:linear-gradient(rgba(0,0,0,.603),rgba(0,0,0,.584)),url('pics/arena.png');background-size:cover;background-position:center;background-repeat:no-repeat}
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1.4rem;margin-top:2.8rem}
+.exp-card{border:1px solid rgba(201,168,76,.18);padding:1.8rem;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;background:rgba(57,44,9,.349)}
+.exp-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--fire),var(--g),var(--gl));transform:scaleX(0);transition:transform .35s;transform-origin:left}
+.exp-card:hover{border-color:rgba(201,168,76,.696);transform:translateY(-4px)}
+.exp-card:hover::before{transform:scaleX(1)}
+.exp-icon{font-size:1.9rem;margin-bottom:.9rem;display:block}
+.exp-title{font-family:var(--bf);font-size:.85rem;letter-spacing:.1em;color:var(--gl);margin-bottom:.7rem;text-transform:uppercase}
+.exp-desc{font-size:.83rem;color:rgba(240,230,204,.68);line-height:1.6}
+
+/* ---- PEOPLE / JUDGES ---- */
+.judges-sec{background:var(--char);position:relative;overflow:hidden}
+.judges-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(139,26,26,.14) 0%,transparent 65%);pointer-events:none}
+.mentors-sec{background:var(--dark);position:relative;overflow:hidden}
+.mentors-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%,rgba(201,168,76,.08) 0%,transparent 65%);pointer-events:none}
+.sec-phoenix{position:absolute;right:-60px;top:50%;transform:translateY(-50%);opacity:.04;pointer-events:none;animation:feather-pulse 6s ease-in-out infinite}
+.sec-phoenix-l{position:absolute;left:-60px;top:50%;transform:translateY(-50%) scaleX(-1);opacity:.04;pointer-events:none;animation:feather-pulse 6s ease-in-out 1s infinite}
+.people-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:1.4rem;margin-top:2.5rem}
+.person-card{border:1px solid rgba(201,168,76,.17);background:rgba(201,168,76,.02);overflow:hidden;transition:transform .3s,border-color .3s;position:relative;display:flex;flex-direction:column}
+.person-card:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.48)}
+.person-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--fire) 20%,var(--g) 50%,var(--gl) 75%,transparent);transform:scaleX(0);transition:transform .4s;transform-origin:left}
+.person-card:hover::after{transform:scaleX(1)}
+.p-avatar{width:100%;aspect-ratio:1;background:var(--mid);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.p-avatar img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.p-initials{position:absolute;font-family:var(--hf);font-size:1.8rem;color:var(--g);z-index:1;letter-spacing:.05em}
+.p-avatar-bg{position:absolute;inset:0;background:linear-gradient(135deg,#1a1710 0%,#2a2418 50%,#1a1710 100%);background-size:200% 200%;animation:shimmer 3.5s ease infinite}
+@keyframes shimmer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.p-fire-bar{position:absolute;bottom:0;left:0;right:0;height:36px;background:linear-gradient(to top,rgba(139,26,26,.55),rgba(232,68,26,.15),transparent);z-index:2}
+.p-info{padding:1.1rem 1.1rem 1.3rem;flex:1}
+.p-role{font-family:var(--bf);font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--g);margin-bottom:.25rem}
+.p-name{font-family:var(--bf);font-size:.95rem;color:var(--txt);font-weight:600;margin-bottom:.35rem;line-height:1.2}
+.p-spec{font-size:.76rem;color:var(--muted);line-height:1.5;margin-bottom:.55rem}
+.p-tag{display:inline-block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;padding:.16rem .55rem;border:1px solid;font-family:var(--bf)}
+.p-tag.jt{border-color:rgba(139,26,26,.5);color:#c97070}
+.p-tag.mt{border-color:rgba(201,168,76,.4);color:var(--g)}
+.p-tag.at{border-color:rgba(90,155,90,.4);color:#7aaa7a}
+.add-card{border:1px dashed rgba(201,168,76,.22);background:transparent;align-items:center;justify-content:center;min-height:280px;text-align:center;padding:2rem;cursor:default}
+.add-card:hover{border-color:rgba(201,168,76,.45);background:rgba(201,168,76,.03)}
+.add-card::after{display:none}
+.add-icon{font-size:2.2rem;color:rgba(201,168,76,.28);margin-bottom:.7rem;display:block;font-family:var(--bf)}
+.add-lbl{font-family:var(--bf);font-size:.67rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);line-height:1.8}
+.sub-lbl{margin-top:3rem;margin-bottom:.2rem;font-family:var(--bf);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;display:flex;align-items:center;gap:1rem}
+.sub-lbl::before,.sub-lbl::after{content:'';flex:1;height:1px;background:rgba(201,168,76,.15)}
+.sub-lbl.red{color:var(--red)}
+.sub-lbl.gold{color:var(--g)}
+.sub-lbl.green{color:#7aaa7a}
+
+/* ---- PASSES ---- */
+.passes-sec{background:var(--dark);position:relative}
+.passes-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(139,26,26,.08) 0%,transparent 50%),radial-gradient(ellipse at 80% 50%,rgba(201,168,76,.06) 0%,transparent 50%);pointer-events:none}
+.passes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:1.4rem;margin-top:2.8rem;align-items:stretch}
+.pass-card{border:1px solid rgba(201,168,76,.2);padding:2.3rem 1.8rem;display:flex;flex-direction:column;position:relative;transition:transform .3s;background:var(--char)}
+.pass-card:hover{transform:translateY(-5px)}
+.pass-card.feat{border-color:var(--g);background:var(--mid);transform:scale(1.025)}
+.pass-card.feat:hover{transform:scale(1.025) translateY(-5px)}
+.pass-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--g);color:var(--dark);font-family:var(--bf);font-size:.58rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:.3rem 1.4rem;white-space:nowrap}
+.pass-dist{font-family:var(--bf);font-size:.58rem;letter-spacing:.3em;color:var(--red);text-transform:uppercase;margin-bottom:.4rem}
+.pass-name{font-family:var(--hf);font-size:1.3rem;color:var(--gl);margin-bottom:.4rem;line-height:1.1}
+.pass-tag{font-size:.78rem;color:var(--muted);font-style:italic;margin-bottom:1.3rem;padding-bottom:1.3rem;border-bottom:1px solid rgba(201,168,76,.13)}
+.pass-price{display:flex;align-items:baseline;gap:.25rem;margin-bottom:.4rem}
+.pass-cur{font-size:1.1rem;color:var(--g);font-family:var(--bf)}
+.pass-amt{font-family:var(--hf);font-size:2.8rem;color:var(--g);line-height:1}
+.pass-save{font-size:.72rem;color:var(--red);margin-bottom:1.3rem;font-family:var(--bf);letter-spacing:.04em}
+.pass-feats{list-style:none;flex:1;margin-bottom:1.8rem}
+.pass-feats li{font-size:.8rem;color:rgba(240,230,204,.8);padding:.45rem 0;border-bottom:1px solid rgba(201,168,76,.06);display:flex;gap:.55rem;align-items:flex-start}
+.pass-feats li::before{content:'◆';color:var(--g);font-size:.48rem;margin-top:.32rem;flex-shrink:0}
+.pass-feats li.dim{color:rgba(240,230,204,.28)}
+.pass-feats li.dim::before{color:rgba(201,168,76,.18)}
+.pass-cta{display:block;text-align:center}
+.urgency{text-align:center;margin-top:2.5rem;font-family:var(--bf);font-size:.73rem;letter-spacing:.14em;color:var(--red);text-transform:uppercase}
+
+/* ---- PASS SWIPER ---- */
+.swiper-outer{position:relative;display:flex;align-items:center;gap:.8rem;margin-top:.5rem}
+.swiper-track-wrap{overflow:hidden;flex:1;cursor:grab;user-select:none}
+.swiper-track-wrap:active{cursor:grabbing}
+.swiper-track{display:flex;gap:1.4rem;transition:transform .42s cubic-bezier(.25,.8,.25,1);will-change:transform;align-items:stretch}
+.swiper-slide{flex:0 0 calc(33.333% - .94rem);min-width:0;display:flex;flex-direction:column}
+.swiper-slide .pass-card{flex:1}
+.swiper-btn{flex-shrink:0;width:65px;height:65px;border-radius:50%;background:rgba(229, 198, 107, 0.12);border:1px solid rgba(194, 160, 67, 0.35);color:var(--g);font-size:1.6rem;line-height:1;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;z-index:2}
+.swiper-btn:hover{background:rgba(231, 182, 48, 0.28);border-color:var(--g)}
+.swiper-btn:disabled{opacity:.25;cursor:default;pointer-events:none}
+.swiper-dots{display:flex;gap:.5rem;justify-content:center;margin-top:1.4rem}
+.swiper-dot{width:8px;height:8px;border-radius:50%;background:rgba(201,168,76,.25);border:none;cursor:pointer;transition:all .25s;padding:0}
+.swiper-dot.active{background:var(--g);transform:scale(1.3)}
+
+/* ---- SCHEDULE ---- */
+.sched-sec{background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),url('pics/smoke.png');background-size:cover;background-position:center;background-repeat:no-repeat}
+.sched-tabs{display:flex;margin-bottom:2rem;border-bottom:1px solid rgba(201,168,76,.2)}
+.stab{font-family:var(--bf);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;padding:.7rem 1.4rem;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;transition:all .2s;background:none;border-top:none;border-left:none;border-right:none}
+.stab.active{color:var(--g);border-bottom-color:var(--g)}
+.stab:hover{color:var(--gl)}
+.spanel{display:none}
+.spanel.active{display:block}
+.sitems{display:flex;flex-direction:column;gap:.7rem}
+.sitem{display:grid;grid-template-columns:95px 1fr auto;align-items:center;gap:1.4rem;padding:.9rem 1.3rem;border:1px solid rgba(201,168,76,.1);background:rgba(201,168,76,.02);transition:border-color .2s}
+.sitem:hover{border-color:rgba(201,168,76,.3)}
+.stime{font-family:var(--bf);font-size:.73rem;color:var(--g);letter-spacing:.1em}
+.sname{font-size:.86rem;color:var(--txt)}
+.sname small{display:block;font-size:.73rem;color:var(--muted)}
+.stype{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;padding:.18rem .65rem;border:1px solid}
+.stype.w{color:var(--g);border-color:rgba(201,168,76,.4)}
+.stype.c{color:#f88181;border-color:rgba(245, 98, 98, 0.5)}
+.stype.s{color:#5a9a5a;border-color:rgba(90,154,90,.4)}
+.stype.d{color:#7a7aaa;border-color:rgba(122,122,170,.4)}
+.stype.e{color:#5959f9;border-color:rgba(88, 88, 245, 0.4)}
+.stype.f{color:#c846f3;border-color:rgba(217, 85, 241, 0.4)}
+
+
+/* ---- TESTIMONIALS ---- */
+.testi-sec{background:var(--dark)}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.4rem;margin-top:2.8rem}
+.tcard{border-left:2px solid var(--g);padding:1.4rem 1.8rem;background:rgba(201,168,76,.03)}
+.tcard::before{content:'"';color:var(--g);font-size:2rem;line-height:0;vertical-align:-.5em;margin-right:.2rem;font-family:var(--hf)}
+.ttext{font-style:italic;font-size:.88rem;color:rgba(240,230,204,.82);line-height:1.8;margin-bottom:.9rem}
+.tauthor{font-family:var(--bf);font-size:.68rem;letter-spacing:.14em;color:var(--g);text-transform:uppercase}
+
+/* ---- FAQ ---- */
+.faq-sec{background:var(--char)}
+.faq-list{margin-top:2.8rem;max-width:760px;margin-left:auto;margin-right:auto}
+.faq-item{border-bottom:1px solid rgba(201,168,76,.14)}
+.faq-q{font-family:var(--bf);font-size:1rem;letter-spacing:.04em;color:var(--txt);padding:1.2rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:.9rem;background:none;border:none;width:100%;text-align:left;transition:color .2s}
+.faq-q:hover{color:var(--g)}
+.faq-arr{color:var(--g);font-size:.68rem;transition:transform .2s;flex-shrink:0}
+.faq-q.open .faq-arr{transform:rotate(180deg)}
+.faq-a{font-size:.83rem;color:rgba(240,230,204,.68);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;padding:0}
+.faq-a.open{max-height:300px;padding-bottom:1.4rem}
+
+/* ---- FINAL CTA ---- */
+.fcta{background:var(--mid);border-top:1px solid rgba(201,168,76,.2);border-bottom:1px solid rgba(201,168,76,.2);text-align:center;padding:7rem 2rem;position:relative;overflow:hidden}
+.fcta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(201,168,76,.09) 0%,transparent 65%);pointer-events:none}
+.fcta-t{font-family:var(--hf);font-size:clamp(2rem,5vw,3.8rem);color:var(--gl);margin-bottom:.9rem}
+.fcta-s{font-size:.97rem;color:rgba(240,230,204,.68);max-width:540px;margin:0 auto 2.3rem}
+
+/* ---- FOOTER ---- */
+footer{background:#050503;padding:2.8rem 2rem;text-align:center;border-top:1px solid rgba(201,168,76,.1)}
+.flogo{font-family:var(--hf);font-size:1.1rem;color:var(--g);margin-bottom:.9rem;display:flex;align-items:center;justify-content:center;gap:.6rem}
+.flogo img{height:28px;width:auto}
+.flinks{display:flex;gap:1.8rem;justify-content:center;flex-wrap:wrap;margin-bottom:1.3rem;list-style:none}
+.flinks a{font-size:.73rem;letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .2s}
+.flinks a:hover{color:var(--g)}
+.fcopy{font-size:.7rem;color:rgba(168,144,96,.38);letter-spacing:.04em}
+
+.detailed-schedule-btn{background:rgba(171,33,33,.14);color:rgba(201,168,76,.5);font-family:var(--bf);font-size:.85rem;padding:.8rem 1.5rem;border:1px solid #C9A84C;border-radius:5px;text-transform:uppercase;text-decoration:none;display:inline-block;transition:all .3s ease}
+.detailed-schedule-btn:hover{background:#C9A84C;color:#0A0905;transform:translateY(-2px)}
+
+
+
+/* ---- RESPONSIVE ---- */
+
+/* Tablet: 600–768px */
+@media(max-width:768px){
+  /* Nav */
+  nav{padding:1rem 1.4rem}
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+
+  /* Hero */
+  .hero{padding:6rem 1.2rem 4rem}
+  .h-ey{font-size:.85rem;letter-spacing:.2em}
+  .h-tag{font-size:1rem;letter-spacing:.06em}
+  .h-badge{padding:.9rem 1.4rem}
+  .h-badge .dm{font-size:1.05rem}
+  .h-badge .dloc{font-size:.8rem;letter-spacing:.1em}
+  .h-btns{gap:.7rem}
+  .btn-p,.btn-s{padding:.75rem 1.6rem;font-size:.7rem;letter-spacing:.12em}
+
+  /* Countdown */
+  .cd-sec{padding:2rem 1rem}
+  .cd-num{font-size:3rem}
+  .cd-sep{display:none}
+  .cd-grid{gap:1rem}
+  .cd-unit{min-width:60px}
+
+  /* About */
+  .about-grid{grid-template-columns:1fr;gap:2rem}
+  .about-sec{padding:4rem 1.2rem}
+
+  /* Experiences */
+  .exp-sec{padding:4rem 1.2rem}
+  .exp-grid{grid-template-columns:1fr}
+
+  /* Schedule */
+  .sched-sec{padding:4rem 1.2rem}
+  .sched-tabs{gap:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .stab{padding:.6rem .9rem;font-size:.62rem;white-space:nowrap;flex-shrink:0}
+  .sitem{grid-template-columns:75px 1fr;gap:.8rem;padding:.75rem .9rem}
+  .stype{display:none}
+  .stime{font-size:.65rem}
+  .sname{font-size:.8rem}
+  .sname small{font-size:.68rem}
+
+  /* Passes */
+  .passes-sec{padding:4rem 1.2rem}
+  .passes-grid{grid-template-columns:1fr;gap:1.2rem}
+  .pass-card.feat{transform:scale(1)}
+  .pass-card{padding:1.8rem 1.4rem}
+
+  /* Director cards — stack photo above bio on mobile */
+  .director-card{grid-template-columns:1fr !important;text-align:center}
+  .director-card .director-avatar{max-width:180px;margin:0 auto}
+  .director-card>div:last-child{text-align:left}
+
+  /* Swiper — 1 card visible on mobile */
+  .swiper-slide{flex:0 0 calc(100% - 0px)}
+  .swiper-btn{width:34px;height:34px;font-size:1.2rem}
+
+  /* People / judges grid */
+  .people-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1rem}
+
+  /* Testimonials */
+  .tgrid{grid-template-columns:1fr}
+
+  /* Sections — reduce section padding globally on mobile */
+  section{padding:4rem 1.2rem}
+
+  /* Decorative elements */
+  .sec-phoenix,.sec-phoenix-l{display:none}
+  .fire-ring{width:320px;height:320px}
+
+  /* Final CTA */
+  .fcta{padding:4rem 1.2rem}
+  .fcta-s{font-size:.86rem}
+
+  /* Footer */
+  .flinks{gap:1rem}
+}
+
+/* Small phones: under 420px */
+@media(max-width:420px){
+  .h-ey{font-size:.72rem;letter-spacing:.12em}
+  .cd-num{font-size:2.4rem}
+  .cd-unit{min-width:48px}
+  .btn-p,.btn-s{width:100%;text-align:center;display:block}
+  .h-btns{flex-direction:column;align-items:center}
+  .pass-card{padding:1.4rem 1rem}
+  .pass-amt{font-size:2.2rem}
+  .sched-tabs{flex-wrap:nowrap}
+  .people-grid{grid-template-columns:repeat(2,1fr)}
+  .faq-q{font-size:.85rem}
+}
+</style>
+</head>
+<body>
+
+
+<!-- NAV -->
+<nav id="nb">
+  <!-- LOGO: swap the text below for an img tag when you have the logo file:
+       <img src="logo.png" alt="Utah Dance Fest" height="36"> -->
+  <a class="nav-logo" href="#"><img src="pics/logo.png" alt="Utah Dance Fest" height="36"> Utah Dance Fest</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#passes">Passes</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#passes" class="nav-cta">Get Passes</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
+    <span>  <img src="pics/logo.png" alt="" aria-hidden="true" style="width:100%;height:100%;object-fit:contain">
+</span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-mobile" id="mobileNav">
+  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#passes" onclick="closeMobileNav()">Passes</a>
+  <a href="#schedule" onclick="closeMobileNav()">Schedule</a>
+  <a href="#faq" onclick="closeMobileNav()">FAQ</a>
+  <a href="#passes" class="nav-cta" onclick="closeMobileNav()">Get Passes</a>
+</div>
+
+<!-- ============================================================ HERO ============================================================ -->
+<section class="hero" id="home">
+  <div class="fire-ring"></div>
+  <div class="embers" id="embers"></div>
+  
+  <div class="hero-content">
+    <p class="h-ey">Ignite Country Fusion Presents</p>
+    <h1 class="h-t1">Utah Dance Fest</h1>
+
+    <!-- COUNTDOWN -->
+    <div class="cd-sec" id="countdown-section">
+      <div class="si center">
+        <p class="ey" style="margin-bottom:1.4rem;">The Games Begin In</p>
+        <div class="cd-grid">
+          <div class="cd-unit"><span class="cd-num" id="cdd">--</span><span class="cd-lbl">Days</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit"><span class="cd-num" id="cdh">--</span><span class="cd-lbl">Hours</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit"><span class="cd-num" id="cdm">--</span><span class="cd-lbl">Minutes</span></div>
+          <span class="cd-sep">:</span>
+          <div class="cd-unit"><span class="cd-num" id="cds">--</span><span class="cd-lbl">Seconds</span></div>
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+    <p class="h-tag">May the odds be ever in your favor</p>
+    <div class="h-badge">
+      <span class="dl">The Arena Opens</span>
+      <span class="dm">September 17–20, 2026</span>
+      <span class="dloc">106 West 5600 North, Provo, UT 84604</span>
+    </div>
+    <div class="h-btns">
+      <a href="#passes" class="btn-p">Claim Your Pass</a>
+      <a href="#about" class="btn-s">Learn More</a>
+    </div>
+  </div>
+  <div class="scroll-arrow" onclick="document.getElementById('countdown-section').scrollIntoView({behavior:'smooth'})">▼</div>
+</section>
+
+
+<!-- ABOUT -->
+<section class="about-sec" id="about">
+  <div class="si">
+    <div class="about-grid">
+      <div>
+        <div class="about-frame">
+          <div class="si-stat"><span class="sn">4</span><span class="sd">Full Days of Dancing</span></div>
+          <div class="si-stat"><span class="sn">30+</span><span class="sd">Workshops, Comps, Classes & Events</span></div>
+          <div class="si-stat"><span class="sn">Utah's #1</span><span class="sd">Country Dance Convention Festival</span></div>
+          <div class="si-stat" style="margin-bottom:0"><span class="sn">All Levels</span><span class="sd">From Newcomers to Advanced</span></div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p class="ey">About The Event</p>
+        <h2 class="st">Utah's First-Ever Country Dance Convention</h2>
+        <div class="dv" style="margin-left:0"></div>
+        <p>Enter the arena. Utah Dance Fest is Utah's first ever country swing convention that started in September of 2024. It is a premier country swing and line dance convention — four days of non-stop dancing, learning, competing, and connecting with the best in the region.</p>
+        <p>With Country Swing and Line Dance as our main events, we are now adding West Coast Swing, Progressive, Slotted, and Zouk — if you love dancing and learning, this is your event. Come ready to sweat, laugh, learn from world-class instructors, and make memories that last all year.</p>
+        <p>This year's theme? <strong style="color:var(--g);font-family:var(--bf);">The Hunger Games.</strong> Districts named. Champions crowned. The dance floor is your arena!</p>
+        <a href="#passes" class="btn-p" style="margin-top:1rem;display:inline-block">Volunteer as Tribute →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCES -->
+<section class="exp-sec" id="experiences">
+  <div class="si">
+    <p class="ey center">What Awaits You</p>
+    <h2 class="st center">Inside The Arena</h2>
+    <div class="dv"></div>
+    <div class="exp-grid">
+      <div class="exp-card"><span class="exp-icon"></span><div class="exp-title">Partner Dance Workshops</div><p class="exp-desc">Country Swing, Progressive, West Coast Swing, and more — taught by nationally recognized instructors.</p></div>
+      <div class="exp-card"><span class="exp-icon"></span><div class="exp-title">Line Dance Workshops</div><p class="exp-desc">Beginner to advanced line dance choreography. Learn new dances and master the classics across multiple levels and styles.</p></div>
+      <div class="exp-card"><span class="exp-icon"></span><div class="exp-title">Competitions</div><p class="exp-desc">Partner or line dance divisions. All skill levels from newcomer through champion. GA pass required to compete.</p></div>
+      <div class="exp-card"><span class="exp-icon"></span><div class="exp-title">Nightly Social Dances</div><p class="exp-desc">After workshops and competitions, the real magic begins. Good music, late-night socials, and hours of dancing with your fellow tributes.</p></div>
+      <div class="exp-card"><span class="exp-icon"></span><div class="exp-title">Artist Showcases & Demos</div><p class="exp-desc">Watch world-class performers bring down the house with demo performances that will leave you breathless and inspired.</p></div>
+      <div class="exp-card"><span class="exp-icon"></span><div class="exp-title">Community & Connection</div><p class="exp-desc">Find your district and become part of Utah's fastest-growing country dance community. Create a network of dancers across the nation and spread the love of dancing. This is your tribe.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SCHEDULE -->
+<section class="sched-sec" id="schedule">
+  <div class="si">
+    <p class="ey">The Arena Schedule</p>
+    <h2 class="st">Four Days of Action</h2>
+
+    <a href="YOUR_SCHEDULE_PDF_LINK_HERE" target="_blank" class="detailed-schedule-btn">
+      Detailed Schedule Coming Soon
+    </a>
+
+    <div class="dv" style="margin-left:0"></div>
+    <div class="sched-tabs">
+      <button class="stab active" onclick="showDay('thu',this)">Thursday</button>
+      <button class="stab" onclick="showDay('fri',this)">Friday</button>
+      <button class="stab" onclick="showDay('sat',this)">Saturday</button>
+      <button class="stab" onclick="showDay('sun',this)">Sunday</button>
+    </div>
+
+    <div class="spanel active" id="day-thu">
+      <div class="sitems">
+        <div class="sitem"><div class="stime">5:00 PM - 6:30 PM</div><div class="sname">Check-in and Registration<small>Doors open for new arrivals — continues until 6:30 PM</small></div><span class="stype w">Check-in</span></div>
+        <div class="sitem"><div class="stime">7:30 PM - 9:30 PM</div><div class="sname">Competitions begin<small>All Slotted comps- prelims and finals & Utah Dance Circuit Finals</small></div><span class="stype d">Competitions</span></div>
+        <div class="sitem"><div class="stime">9:30 PM - 1:00 AM</div><div class="sname">Social Dancing Ends<small>All styles and all levels of dancing — let the Games beginWe can't wait to see you in the arena giving it your all over the weekend.</small></div><span class="stype s">Social</span></div>
+      </div>
+    </div>
+
+    <div class="spanel" id="day-fri">
+      <div class="sitems">
+        <div class="sitem"><div class="stime">9:30 AM - 5:30 PM</div><div class="sname">Check-in and Registration<small>Doors open for new arrivals — continues until 6:30 PM</small></div><span class="stype w">Check-in</span></div>
+        <div class="sitem"><div class="stime">10:00 AM - 12:50 PM</div><div class="sname">Workshops<small>Workshops for Partner and Line Dancing</small></div><span class="stype c">Workshop</span></div>
+        <div class="sitem"><div class="stime">1:00 PM - 1:50 PM</div><div class="sname">Lunch Break Break<small>Take a break from dancing and refuel for the long night</small></div><span class="stype e">Dinner</span></div>
+        <div class="sitem"><div class="stime">2:00 PM - 3:50 PM</div><div class="sname">Workshops<small>Workshops for Partner and Line Dancing</small></div><span class="stype c">Workshop</span></div>
+        <div class="sitem"><div class="stime">5:00 PM - 5:30 PM</div><div class="sname">Last Call for Check in & Registration<small>Make sure you buy any last minute comps you want to compete in and are checked in and have your bib number.</small></div><span class="stype w">Check in</span></div>
+        <div class="sitem"><div class="stime">6:30 PM - 9:30 PM</div><div class="sname">Competitions Begin<small>All levels take the floor — may the best dancers rise</small></div><span class="stype d">Competitions</span></div>
+        <div class="sitem"><div class="stime">9:30 PM – 1:00 AM</div><div class="sname">Friday Night Social Dance<small>Good music and dancing the night away with all your allies</small></div><span class="stype s">Social</span></div>
+      </div>
+    </div>
+
+    <div class="spanel" id="day-sat">
+      <div class="sitems">
+        <div class="sitem"><div class="stime">9:30 AM - 5:30 PM</div><div class="sname">Check-in and Registration<small>Doors open for new arrivals — continues until 6:30 PM</small></div><span class="stype w">Check-in</span></div>
+        <div class="sitem"><div class="stime">10:00 AM - 12:50 PM</div><div class="sname">Workshops<small>Workshops for Partner and Line Dancing</small></div><span class="stype c">Workshop</span></div>
+        <div class="sitem"><div class="stime">1:00 PM - 1:50 PM</div><div class="sname">Lunch Break Break<small>Take a break from dancing and refuel for the long night</small></div><span class="stype e">Dinner</span></div>
+        <div class="sitem"><div class="stime">2:00 PM - 3:50 PM</div><div class="sname">Workshops<small>Workshops for Partner and Line Dancing</small></div><span class="stype c">Workshop</span></div>
+        <div class="sitem"><div class="stime">5:00 PM - 6:00 PM</div><div class="sname">Lunch Break Break<small>Take a break from dancing and refuel for the long night</small></div><span class="stype e">Dinner</span></div>
+        <div class="sitem"><div class="stime">6:00 PM - 7:00 PM</div><div class="sname">Last Call for Check in & Registration<small>Make sure you buy any last minute comps you want to compete in and are checked in and have your bib number.</small></div><span class="stype w">Check in</span></div>
+        <div class="sitem"><div class="stime">7:00 PM - 9:30 PM</div><div class="sname">Competitions Begin<small>All levels take the floor — may the best dancers rise</small></div><span class="stype d">Competitions</span></div>
+        <div class="sitem"><div class="stime">10:30 PM – 2:00 AM</div><div class="sname">Saturday Night Social Dance<small>The biggest social dance of the weekend — dance until the arena goes dark</small></div><span class="stype s">Social</span></div>
+      </div>
+    </div>
+
+    <div class="spanel" id="day-sun">
+      <div class="sitems">
+        <div class="sitem"><div class="stime">9:30 AM– 10:00 AM</div><div class="sname">Sunday Morning Devotional<small>A moment to center ourselves, honoring our faith before we enter the final arena</small></div><span class="stype f">Devotional</span></div>
+        <div class="sitem"><div class="stime">10:00 AM– 10:50 AM</div><div class="sname">Wellness Time<small>A moment to prioritize healing and wellness for ourselves and come back refreshed.</small></div><span class="stype f">Wellness</span></div>
+        <div class="sitem"><div class="stime">11:00 AM - 1:50 PM</div><div class="sname">Workshops<small>Last chance to learn and grow</small></div><span class="stype c">Workshop</span></div>
+        <div class="sitem"><div class="stime">2:00 PM - 3:00 PM</div><div class="sname">Dinner Break<small>Take a break from the comps and get ready to receive your awards.</small></div><span class="stype e">Dinner</span></div>
+        <div class="sitem"><div class="stime">3:00 PM - 6:00 PM</div><div class="sname">Competitions<small>The final battles — one last chance to shine</small></div><span class="stype d">Competitions</span></div>
+        <div class="sitem"><div class="stime">6:00 PM - 7:30 PM</div><div class="sname">Awards Ceremony — The Victor Rises<small>Champions crowned. Tributes honored. Legends made.</small></div><span class="stype f">Ceremony</span></div>
+        <div class="sitem"><div class="stime">7:30 PM - 12:00 AM</div><div class="sname">Closing Social & Farewell Dance<small>See you next year, tribute</small></div><span class="stype s">Social</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PASSES -->
+<section class="passes-sec" id="passes">
+  <div class="si">
+    <p class="ey center">Choose Your Fate</p>
+    <h2 class="st center">Select Your Pass</h2>
+    <div class="dv"></div>
+    <p class="center" style="color:var(--muted);font-size:.86rem;max-width:580px;margin:0 auto 2rem">Every tribute must choose their path into the arena. Swipe to explore all options — full passes are limited to 40 per month.</p>
+
+    <!-- SWIPER WRAPPER -->
+    <div class="swiper-outer">
+      <button class="swiper-btn swiper-prev" id="swPrev" aria-label="Previous pass">&#8249;</button>
+      <div class="swiper-track-wrap" id="swTrack">
+        <div class="swiper-track" id="swInner">
+
+          <!-- SLIDE 0: Student Out-of-State (left of All Access on load) -->
+          <div class="swiper-slide">
+            <div class="pass-card" style="height:100%">
+              <p class="pass-dist">Student Tier</p>
+              <h3 class="pass-name">Student — All Access Pass</h3>
+              <p class="pass-tag">Secure your spot at the Utah Country Swing Dance Festival</p>
+              <div class="pass-price"><span class="pass-cur">$</span><span class="pass-amt">115</span><span style="font-size:.8rem;color:var(--muted);margin-left:.4rem">+ $6.24 fee</span></div>
+              <ul class="pass-feats">
+                <li>Full access to all four days of the event</li>
+                <li>All workshops — partner dance &amp; line dance</li>
+                <li>Competition entry for the full weekend</li>
+                <li>Nightly social dances through 2:00 AM</li>
+                <li>Opening &amp; awards ceremonies</li>
+                <li style="color:#c97070;font-style:italic">Out-of-state students only · Valid student ID required</li>
+              </ul>
+              <a href="https://www.danceplace.com/book/it/15853" target="_blank" class="btn-s pass-cta">Claim Student Pass →</a>
+            </div>
+          </div>
+
+          <!-- SLIDE 1: ALL ACCESS — CENTER / FEATURED (starts here on load) -->
+          <div class="swiper-slide">
+            <div class="pass-card feat" style="transform:none;height:100%">
+              <div class="pass-badge">Best Value — Buy Early to Save Big</div>
+              <p class="pass-dist">Tribute Tier</p>
+              <h3 class="pass-name">All Access Event Pass</h3>
+              <p class="pass-tag">The full arena experience — workshops, competitions, socials, and ceremonies all weekend long.</p>
+              <div class="pass-price"><span class="pass-cur">$</span><span class="pass-amt">165</span><span style="font-size:.8rem;color:var(--muted);margin-left:.4rem">+ $8.82 fee</span></div>
+              <ul class="pass-feats">
+                <li>Full access to all four days of the event</li>
+                <li>All workshops — partner dance &amp; line dance</li>
+                <li>Competition entry for the full weekend</li>
+                <li>Nightly social dances through 2:00 AM</li>
+                <li>Opening ceremony &amp; awards ceremony</li>
+                <li>The complete arena experience — nothing held back</li>
+              </ul>
+              <a href="https://www.danceplace.com/book/it/15853" target="_blank" class="btn-p pass-cta">Enter the Arena →</a>
+            </div>
+          </div>
+
+          <!-- SLIDE 2: Utah Student (right of All Access on load) -->
+          <div class="swiper-slide">
+            <div class="pass-card" style="height:100%">
+              <p class="pass-dist">Utah Student Tier</p>
+              <h3 class="pass-name">Utah Student — All Access Pass</h3>
+              <p class="pass-tag">For Utah-based students ready to enter the arena</p>
+              <div class="pass-price"><span class="pass-cur">$</span><span class="pass-amt">85</span><span style="font-size:.8rem;color:var(--muted);margin-left:.4rem">+ $4.68 fee</span></div>
+              <ul class="pass-feats">
+                <li>Full access to all four days of the event</li>
+                <li>All workshops — partner dance &amp; line dance</li>
+                <li>Competition entry for the full weekend</li>
+                <li>Nightly social dances through 2:00 AM</li>
+                <li>Opening &amp; awards ceremonies</li>
+                <li style="color:#7aaa7a;font-style:italic">Utah residents only · Valid student ID required</li>
+              </ul>
+              <a href="https://www.danceplace.com/book/it/15853" target="_blank" class="btn-s pass-cta">Claim Utah Student Pass →</a>
+            </div>
+          </div>
+
+  <!-- SLIDE 5: Launch of Hunger Games Pre-Party -->
+<div class="swiper-slide">
+  <div class="pass-card" style="height:100%">
+    <p class="pass-dist">Pre-Party</p>
+    <h3 class="pass-name">Launch of Hunger Games — Pre-Party</h3>
+    <p class="pass-tag">The biggest country swing party out there — kick off the Games in style</p>
+    <div class="pass-price"><span class="pass-cur">$</span><span class="pass-amt">15</span><span style="font-size:.8rem;color:var(--muted);margin-left:.4rem">+ $1.09 fee</span></div>
+    <p class="pass-save" style="color:var(--g)">vs. $20 at the door · Available until Sep 20, 2026</p>
+    <ul class="pass-feats">
+      <li>Food trucks on-site all evening</li>
+      <li>Social comps open to all attendees</li>
+      <li>Free raffle prizes throughout the night</li>
+      <li>Live demo dances &amp; much more</li>
+      <li>The perfect way to kick off the weekend</li>
+      <li class="dim">Does not include full event access</li>
+    </ul>
+    <a href="https://www.danceplace.com/book/it/15853" target="_blank" class="btn-s pass-cta">Join the Pre-Party →</a>
+  </div>
+</div>
+          <!-- SLIDE 3: VIP / Capitol Elite -->
+          <div class="swiper-slide">
+            <div class="pass-card" style="height:100%">
+              <p class="pass-dist">Capitol Tier</p>
+              <h3 class="pass-name">Capitol Elite — VIP Pass</h3>
+              <p class="pass-tag">The full Capitol experience — luxury perks all weekend long</p>
+              <div class="pass-price"><span class="pass-cur">$</span><span class="pass-amt">65</span><span style="font-size:.8rem;color:var(--muted);margin-left:.4rem">+ $3.66 fee</span></div>
+              <p class="pass-save" style="color:var(--red)">Available until Sep 20, 2026 · Limited availability</p>
+              <ul class="pass-feats">
+                <li>Access to the exclusive VIP lounge all weekend</li>
+                <li>Complimentary drinks &amp; snacks throughout</li>
+                <li>25% off all merchandise at the festival store</li>
+                <li>25% credit toward any private lesson</li>
+                <li>The ultimate way to experience the Games</li>
+                <li class="dim">Add-on to any full pass</li>
+              </ul>
+              <a href="https://www.danceplace.com/book/it/15853" target="_blank" class="btn-s pass-cta">Claim Capitol Status →</a>
+            </div>
+          </div>
+
+          <!-- SLIDE 4: Competitors / Social Day Pass -->
+          <div class="swiper-slide">
+            <div class="pass-card" style="height:100%">
+              <p class="pass-dist">Competitor Tier</p>
+              <h3 class="pass-name">Competitors / Social Day Pass</h3>
+              <p class="pass-tag">Made for dancers wanting to compete and stay to dance the night away</p>
+              <div class="pass-price"><span class="pass-cur">$</span><span class="pass-amt">25</span><span style="font-size:.8rem;color:var(--muted);margin-left:.4rem">+ $1.60 fee</span></div>
+              <p class="pass-save" style="color:var(--g)">Compete in your division + own the floor all night</p>
+              <ul class="pass-feats">
+                <li>Competition entry for your chosen day</li>
+                <li>Evening social dance access after 6 PM</li>
+                <li>Available until Sep 20, 2026</li>
+                <li class="dim">Workshops &amp; daytime classes not included</li>
+                <li class="dim">Full weekend access</li>
+                <li class="dim">VIP lounge access</li>
+              </ul>
+              <a href="https://www.danceplace.com/book/it/15853" target="_blank" class="btn-s pass-cta">Get Day Pass →</a>
+            </div>
+          </div>
+
+                <!-- SLIDE 5: Day Pass — Friday -->
+          <div class="swiper-slide">
+            <div class="pass-card" style="height:100%">
+              <p class="pass-dist">Day Tier</p>
+              <h3 class="pass-name">Day Pass — Friday</h3>
+              <p class="pass-tag">Full access to everything Friday has to offer — workshops, socials, and comps</p>
+              <div class="pass-price"><span class="pass-cur">$</span><span class="pass-amt">85</span><span style="font-size:.8rem;color:var(--muted);margin-left:.4rem">+ $4.69 fee</span></div>
+              <p class="pass-save" style="color:var(--g)">Available until Sep 20, 2026</p>
+              <ul class="pass-feats">
+                <li>Full access to Friday workshops</li>
+                <li>Friday competition entry</li>
+                <li>Friday night social dance through 2:00 AM</li>
+                <li class="dim">Saturday &amp; Sunday access</li>
+                <li class="dim">Full weekend workshops</li>
+                <li class="dim">VIP lounge access</li>
+              </ul>
+              <a href="https://www.danceplace.com/book/it/15853" target="_blank" class="btn-s pass-cta">Get Friday Pass →</a>
+            </div>
+          </div>
+ 
+       
+          <!-- SLIDE 6: Social / Spectator — Friday -->
+          <div class="swiper-slide">
+            <div class="pass-card" style="height:100%">
+              <p class="pass-dist">Spectator Tier</p>
+              <h3 class="pass-name">Social / Spectator Pass — Friday</h3>
+              <p class="pass-tag">Step inside the arena Friday night — no commitment required</p>
+              <div class="pass-price"><span class="pass-cur">$</span><span class="pass-amt">15</span><span style="font-size:.8rem;color:var(--muted);margin-left:.4rem">+ $1.09 fee</span></div>
+              <p class="pass-save" style="color:var(--g)">vs. $20 at the door — save $5 online</p>
+              <ul class="pass-feats">
+                <li>Entry after 6 PM on Friday</li>
+                <li>Full access to Friday night social dance floor</li>
+                <li>Perfect for first-timers or friends tagging along</li>
+                <li class="dim">Workshops &amp; daytime classes</li>
+                <li class="dim">Competition entry</li>
+                <li class="dim">Full weekend access</li>
+              </ul>
+              <a href="https://www.danceplace.com/book/it/15853" target="_blank" class="btn-s pass-cta">Get Friday Pass →</a>
+            </div>
+          </div>
+   <!-- SLIDE 6: Day Pass — Saturday -->
+          <div class="swiper-slide">
+            <div class="pass-card" style="height:100%">
+              <p class="pass-dist">Day Tier</p>
+              <h3 class="pass-name">Day Pass — Saturday</h3>
+              <p class="pass-tag">The biggest day of the weekend — full access to everything Saturday</p>
+              <div class="pass-price"><span class="pass-cur">$</span><span class="pass-amt">85</span><span style="font-size:.8rem;color:var(--muted);margin-left:.4rem">+ $4.69 fee</span></div>
+              <p class="pass-save" style="color:var(--g)">Available until Sep 20, 2026</p>
+              <ul class="pass-feats">
+                <li>Full access to Saturday workshops</li>
+                <li>Saturday competition entry</li>
+                <li>Saturday night social dance through 2:00 AM</li>
+                <li class="dim">Friday &amp; Sunday access</li>
+                <li class="dim">Full weekend workshops</li>
+                <li class="dim">VIP lounge access</li>
+              </ul>
+              <a href="https://www.danceplace.com/book/it/15853" target="_blank" class="btn-s pass-cta">Get Saturday Pass →</a>
+            </div>
+          </div>
+
+          <!-- SLIDE 7: Social / Spectator — Saturday -->
+          <div class="swiper-slide">
+            <div class="pass-card" style="height:100%">
+              <p class="pass-dist">Spectator Tier</p>
+              <h3 class="pass-name">Social / Spectator Pass — Saturday</h3>
+              <p class="pass-tag">The biggest social night of the weekend — join us Saturday</p>
+              <div class="pass-price"><span class="pass-cur">$</span><span class="pass-amt">15</span><span style="font-size:.8rem;color:var(--muted);margin-left:.4rem">+ $1.09 fee</span></div>
+              <p class="pass-save" style="color:var(--g)">vs. $20 at the door — save $5 online</p>
+              <ul class="pass-feats">
+                <li>Entry after 6 PM on Saturday</li>
+                <li>Full access to Saturday night social dance floor</li>
+                <li>The biggest social dance of the whole weekend</li>
+                <li class="dim">Workshops &amp; daytime classes</li>
+                <li class="dim">Competition entry</li>
+                <li class="dim">Full weekend access</li>
+              </ul>
+              <a href="https://www.danceplace.com/book/it/15853" target="_blank" class="btn-s pass-cta">Get Saturday Pass →</a>
+            </div>
+          </div>
+
+        </div><!-- /swiper-track -->
+      </div><!-- /swiper-track-wrap -->
+      <button class="swiper-btn swiper-next" id="swNext" aria-label="Next pass">&#8250;</button>
+    </div><!-- /swiper-outer -->
+
+    <!-- Dot indicators -->
+    <div class="swiper-dots" id="swDots"></div>
+
+    <p class="urgency" style="margin-top:2.5rem">🔥 &nbsp; Register online and save — prices go up at the door &nbsp; 🔥</p>
+    <div style="text-align:center;margin-top:1.5rem;padding:1.4rem;border:1px solid rgba(201,168,76,.15);background:rgba(201,168,76,.03)">
+      <p style="font-family:var(--bf);font-size:.72rem;letter-spacing:.15em;color:var(--g);text-transform:uppercase;margin-bottom:.5rem">View every pass on Danceplace</p>
+      <p style="font-size:.83rem;color:rgba(240,230,204,.65);margin-bottom:1rem">Register directly and secure your spot before the month's 40 passes sell out.</p>
+      <a href="https://www.danceplace.com/book/it/15853" target="_blank" class="btn-s" style="font-size:.72rem;padding:.7rem 1.8rem">View All Tickets on Danceplace →</a>
+    </div>
+    <p style="text-align:center;margin-top:1.2rem;font-size:.90rem;color:var(--muted)">
+      Questions? Call or text Loretta: <a href="tel:3306634310" style="color:var(--g)">(330) 663-4310</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.instagram.com/utah_dancefest" target="_blank" style="color:var(--g)">@utah_dancefest</a>
+    </p>
+  </div>
+</section>
+<!-- ============================================================
+EVENT DIRECTOR & COORDINATORS — "THE CAPITOL"
+============================================================ -->
+<section class="mentors-sec" id="team" style="background:var(--char)">
+  <svg class="sec-phoenix" width="380" height="460" viewBox="0 0 310 400" fill="none"><ellipse cx="158" cy="222" rx="50" ry="72" fill="#C9A84C"/><path d="M128 195 C83 166 35 152 6 128 C26 143 60 156 90 172 Z" fill="#C9A84C"/><path d="M148 292 C133 335 118 366 94 397" fill="none" stroke="#C9A84C" stroke-width="4"/><path d="M158 297 C153 343 151 378 142 408" fill="none" stroke="#C9A84C" stroke-width="4"/><path d="M168 295 C170 340 178 374 182 406" fill="none" stroke="#C9A84C" stroke-width="4"/></svg>
+  <svg class="sec-phoenix-l" width="380" height="460" viewBox="0 0 310 400" fill="none"><ellipse cx="158" cy="222" rx="50" ry="72" fill="#C9A84C"/><path d="M128 195 C83 166 35 152 6 128 C26 143 60 156 90 172 Z" fill="#C9A84C"/><path d="M148 292 C133 335 118 366 94 397" fill="none" stroke="#C9A84C" stroke-width="4"/><path d="M158 297 C153 343 151 378 142 408" fill="none" stroke="#C9A84C" stroke-width="4"/></svg>
+
+  <div class="si">
+    <div class="torch-div"><div class="tl"></div><span class="tf">🔥</span><div class="tl"></div></div>
+    <p class="ey center">The Capitol</p>
+    <h2 class="st center">Event Director & Coordinators</h2>
+    <div class="dv"></div>
+    <p class="center" style="color:var(--muted);font-size:.86rem;max-width:620px;margin:0 auto 1rem">Behind every great Games is a team who built the arena. Meet the people who pour their heart into making Utah Dance Fest an unforgettable experience year after year.</p>
+
+    <!-- FRANZ — Event Director -->
+    <div class="director-card" style="display:grid;grid-template-columns:260px 1fr;gap:2rem;align-items:center;border:1px solid rgba(201,168,76,.35);background:var(--mid);padding:2rem;margin-bottom:2rem;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--fire) 20%,var(--g) 50%,var(--gl) 75%,transparent)"></div>
+      <div class="director-avatar" style="position:relative">
+                <div style="width:100%;aspect-ratio:1;background:var(--char);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border:1px solid rgba(201,168,76,.25)">
+            <img src="staff/franzs.jpg" alt="Franz Lezama-Acharte" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(139,26,26,.55),rgba(232,68,26,.12),transparent);z-index:2"></div>
+        </div>
+        <div style="margin-top:.8rem;text-align:center">
+          <span style="display:inline-block;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;padding:.25rem .9rem;border:1px solid rgba(201,168,76,.5);color:var(--g);font-family:var(--bf)">Event Director</span>
+        </div>
+      </div>
+      <div>
+        <p style="font-family:var(--bf);font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--g);margin-bottom:.5rem">Founder & Director</p>
+        <h3 style="font-family:var(--hf);font-size:1.8rem;color:var(--gl);line-height:1.05;margin-bottom:.4rem">Franz Lezama-Acharte</h3>
+        <p style="font-family:var(--bf);font-style:italic;font-size:.82rem;color:var(--red);margin-bottom:1rem;letter-spacing:.05em">Ignite Country Fusion</p>
+        <div style="width:40px;height:1px;background:var(--g);opacity:.45;margin-bottom:1rem"></div>
+        <p style="font-size:.88rem;color:rgba(240,230,204,.78);line-height:1.8;margin-bottom:.8rem">The visionary behind Utah's first-ever country dance convention. Franz has dedicated years to building a country dance community in Utah, founding Ignite Country Fusion and dreaming up an event that brings dancers of all levels together under one roof — and one incredible theme.</p>
+        <p style="font-size:.88rem;color:rgba(240,230,204,.78);line-height:1.8">His passion for partner dance, community, and spectacle is the fire that keeps Utah Dance Fest alive. Every year, he makes the Games bigger, bolder, and more unforgettable than the last.</p>
+        <div style="display:flex;gap:1rem;margin-top:1.2rem;flex-wrap:wrap">
+          <a href="tel:8015541876" style="font-family:var(--bf);font-size:.72rem;letter-spacing:.12em;color:var(--g);text-decoration:none">📞 (801) 554-1876</a>
+          <a href="https://www.instagram.com/innovative_dancing_king" target="_blank" style="font-family:var(--bf);font-size:.72rem;letter-spacing:.12em;color:var(--g);text-decoration:none"> @innovative_dancing_king</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- RUSS — Competition Coordinator -->
+    <div class="director-card" style="display:grid;grid-template-columns:260px 1fr;gap:2rem;align-items:center;border:1px solid rgba(201,168,76,.35);background:var(--mid);padding:2rem;margin-bottom:2rem;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--fire) 20%,var(--g) 50%,var(--gl) 75%,transparent)"></div>
+      <div class="director-avatar" style="position:relative">
+                <div style="width:100%;aspect-ratio:1;background:var(--char);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border:1px solid rgba(201,168,76,.25)">
+            <img src="staff/Russ.jpg" alt="Russ" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+            <div style="position:absolute;bottom:0;left:0;right:0;height:60px;background:linear-gradient(to top,rgba(139,26,26,.55),rgba(232,68,26,.12),transparent);z-index:2"></div>
+        </div>
+        <div style="margin-top:.8rem;text-align:center">
+          <span style="display:inline-block;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;padding:.25rem .9rem;border:1px solid rgba(201,168,76,.5);color:var(--g);font-family:var(--bf)">Competition Coordinator</span>
+        </div>
+      </div>
+      <div>
+        <p style="font-family:var(--bf);font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--g);margin-bottom:.5rem">Competition & Event Coordinator</p>
+        <h3 style="font-family:var(--hf);font-size:1.8rem;color:var(--gl);line-height:1.05;margin-bottom:.4rem">Russ Bradchulis</h3>
+        <p style="font-family:var(--bf);font-style:italic;font-size:.82rem;color:var(--red);margin-bottom:1rem;letter-spacing:.05em">6x World Champion Country Dancer</p>
+        <div style="width:40px;height:1px;background:var(--g);opacity:.45;margin-bottom:1rem"></div>
+        <p style="font-size:.88rem;color:rgba(240,230,204,.78);line-height:1.8;margin-bottom:.8rem">Russ teaches at events coast to coast. He brings that same energy to Utah Dance Fest as our competition coordinator. With years of experience running competitions at every level, he brings precision, structure, and an unmatched understanding of the dance floor. He's the reason everything runs like clockwork.</p>
+        <p style="font-size:.88rem;color:rgba(240,230,204,.78);line-height:1.8">As a Kickstart Country Instructor, Russ is known for his ability to connect with dancers of every level — making competitions feel less like a battle and more like the moment every tribute has been training for.</p>
+        <a href="https://www.instagram.com/russbradchulis" target="_blank" style="font-family:var(--bf);font-size:.72rem;letter-spacing:.12em;color:var(--g);text-decoration:none;margin-top:1.2rem;display:inline-block"> @russbradchulis</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+JUDGES — "THE GAMEMAKERS"
+============================================================ -->
+<!-- <section class="judges-sec" id="judges">
+  <div class="si">
+    <div class="torch-div"><div class="tl"></div><span class="tf">🔥</span><div class="tl"></div></div>
+    <p class="ey center">The Gamemakers</p>
+    <h2 class="st center">Meet Your Judges</h2>
+    <div class="dv"></div>
+    <p class="center" style="color:var(--muted);font-size:.86rem;max-width:600px;margin:0 auto .5rem">Hand-selected for their mastery and eye for excellence. These Gamemakers will witness every move you make on the floor.</p>
+
+    <div class="people-grid" id="judges-grid">
+
+      <div class="person-card">
+        <div class="p-avatar"><img src="staff/Bameo.jpg" alt="Ben and Cameo — EmCee and Judge, West Coast Swing"></div>
+        <div class="p-info">
+          <div class="p-role">EmCee & Judge</div>
+          <div class="p-name">Ben & Cameo</div>
+          <div class="p-spec">West Coast Swing</div>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="p-avatar"><img src="staff/David.jpg" alt="David Saylors — Judge and Instructor"></div>
+        <div class="p-info">
+          <div class="p-role">Judge & Instructor</div>
+          <div class="p-name">David Saylors</div>
+          <div class="p-spec">Country Swing · West Coast Swing · Country Two-Step</div>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="p-avatar"><img src="staff/Danya.jpg" alt="Danya Svir — Judge and Instructor"></div>
+        <div class="p-info">
+          <div class="p-role">Judge & Instructor</div>
+          <div class="p-name">Danya Svir</div>
+          <div class="p-spec">Country Swing · Country Two-Step · West Coast Swing</div>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="p-avatar"><img src="staff/Elise.jpg" alt="Elise Holland — Head Judge"></div>
+        <div class="p-info">
+          <div class="p-role">Head Judge</div>
+          <div class="p-name">Elise Holland</div>
+          <div class="p-spec">Country Swing · West Coast Swing</div>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="p-avatar"><img src="staff/Ashley.jpg" alt="Ashley — Judge and Instructor"></div>
+        <div class="p-info">
+          <div class="p-role">Judge & Instructor</div>
+          <div class="p-name">Ashley</div>
+          <div class="p-spec">Country Swing</div>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="p-avatar"><img src="staff/Clay.jpg" alt="Clay — Judge"></div>
+        <div class="p-info">
+          <div class="p-role">Judge</div>
+          <div class="p-name">Clay</div>
+          <div class="p-spec">Country Two-Step · West Coast Swing</div>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="p-avatar"><img src="staff/Ellis.jpg" alt="Ellis — Judge and Instructor"></div>
+        <div class="p-info">
+          <div class="p-role">Judge & Instructor</div>
+          <div class="p-name">Ellis</div>
+          <div class="p-spec">Country Two-Step · West Coast Swing</div>
+        </div>
+      </div>
+
+      <div class="person-card">
+        <div class="p-avatar"><img src="staff/Kat.jpg" alt="Kat Nichols — Judge and Instructor"></div>
+        <div class="p-info">
+          <div class="p-role">Judge & Instructor</div>
+          <div class="p-name">Kat Nichols</div>
+          <div class="p-spec">Country Swing · Line Dance</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section> -->
+
+<!-- Elfsight Instagram Feed | Untitled Instagram Feed -->
+<script src="https://elfsightcdn.com/platform.js" async></script>
+<div class="elfsight-app-61f6ad3a-e967-414f-9ae9-18d16ed7f01b" data-elfsight-app-lazy></div>
+
+<div style="text-align:center;margin-top:2rem">
+  <a href="https://www.instagram.com/utah_dancefest" target="_blank" class="btn-p">Follow @utah_dancefest on Instagram →</a>
+</div>
+</div>
+</section>
+
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec">
+  <div class="si">
+    <p class="ey center">From the Districts</p>
+    <h2 class="st center">What Tributes Say</h2>
+    <div class="dv"></div>
+    <div class="tgrid">
+      <div class="tcard"><p class="ttext">I've been to conventions all over and Utah Dance Fest blew me away. The instructors were the best, the social dances went all night, and the community is so welcoming.</p><p class="tauthor">— Kayla M.</p></div>
+      <div class="tcard"><p class="ttext">Came as a complete beginner and left with new friends, and I can't wait to be back.</p><p class="tauthor">— Jake T.</p></div>
+      <div class="tcard"><p class="ttext">The competition energy was amazing. Competing was one of the most fun things I've ever done.</p><p class="tauthor">— Shea R.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-sec" id="faq">
+  <div class="si">
+    <p class="ey center">Tribute Briefing</p>
+    <h2 class="st center">Frequently Asked Questions</h2>
+    <div class="dv"></div>
+    <div class="faq-list">
+      <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">Do I need dance experience to attend? <span class="faq-arr">▼</span></button><div class="faq-a">Absolutely not! Utah Dance Fest welcomes all experience levels — from complete beginners to seasoned champions. We have workshops designed for first-timers and the community is famously welcoming to newcomers.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">Do I need a partner to attend? <span class="faq-arr">▼</span></button><div class="faq-a">Nope! Many attendees come solo. Social dances are a great place to meet partners, and our rotation-based workshops ensure everyone dances with multiple people all weekend.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">What pass do I need to compete? <span class="faq-arr">▼</span></button><div class="faq-a">A General Admission (Tribute) pass or higher is required to enter competitions. The District Pass covers socials and evening events only. If you plan to compete, go Tribute or above.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">What styles of dance are featured? <span class="faq-arr">▼</span></button><div class="faq-a">Utah Dance Fest is a Country Partner and Line Dance event. Styles include Country Swing, West Coast Swing, Progressive, and Line Dancing across all levels.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">Can I upgrade my pass after purchasing? <span class="faq-arr">▼</span></button><div class="faq-a">Yes, upgrades available subject to availability. Contact Franz at (801) 554-1876.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">What if I won a pass through a comp/giveaway? <span class="faq-arr">▼</span></button><div class="faq-a">Use the promo code to buy your passes. Contact Franz at (801) 554-1876 with any questions.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">Which airport should I fly into? <span class="faq-arr">▼</span></button><div class="faq-a">The best option is the Salt Lake City (SLC) Airport or the Provo Airport.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">Where can I find the results of the competitions? <span class="faq-arr">▼</span></button><div class="faq-a">Results will be announced on Danceplace as well as Instagram.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">What is the theme that I should be wearing for the weekend? <span class="faq-arr">▼</span></button><div class="faq-a">The themes will be announced on the Utah Dance Fest Instagam.</div></div>
+      <div class="faq-item"><button class="faq-q" onclick="tFaq(this)">What should I do for lodging? <span class="faq-arr">▼</span></button><div class="faq-a">    <a href="https://www.hilton.com/en/hotels/pvuhhhx-hampton-provo/?SEO_id=GMB-AMER-HX-PVUHHHX&y_source=1_MjA4MjQ2My03MTUtbG9jYXRpb24ud2Vic2l0ZQ%3D%3D" target="_blank" style="color:var(--g);text-decoration:underline;">Hampton Inn</a><br>
+        <a href="https://www.choicehotels.com/utah/provo/sleep-inn-hotels/ut425?mc=llgoxxpx" target="_blank" style="color:var(--g);text-decoration:underline;">Sleep Inn</a><br>
+        <a href="        https://www.expedia.com/Provo-Hotels-Fairfield-Inn-Suites-By-Marriott-Provo-Orem.h12614731.Hotel-Information?chkin=2026-07-10&chkout=2026-07-11&x_pwa=1&rfrr=HSR&pwa_ts=1782454287449&referrerUrl=aHR0cHM6Ly93d3cuZXhwZWRpYS5jb20vSG90ZWwtU2VhcmNo&useRewards=false&rm1=a2&regionId=6031344&destination=Provo%2C+UT%2C+United+States+of+America+%28PVU%29&destType=MARKET&neighborhoodId=553248635976473505&selected=12614731&latLong=40.21888%2C-111.71816&hotelName=Fairfield+Inn+%26+Suites+by+Marriott+Provo+Orem&sort=RECOMMENDED&top_dp=210&top_cur=USD&semcid=US.UB.BING.AC-c-EN.HOTEL&semdtl=a1688950922.b11275435236942526.g1kwd-79715220117411%3Aloc-190.e1c.m1c3147adf7d2310f0755010e16b7c3ee5.r1.c1.j195933.k166584.d179714812055830.h1b.i1.l1.n1.o1.p1.q1.s1.t1.x1.f1.u1.v1.w1&userIntent=&selectedRoomType=322384116&selectedRatePlan=390953451&categorySearch=any_option&searchId=6694febe-579b-4218-9103-812078bc716d
+        " target="_blank" style="color:var(--g);text-decoration:underline;">Fairfield Inn</a>
+</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="fcta" id="register">
+  <div class="si">
+    <p class="ey center">The Reaping Is Now</p>
+    <h2 class="fcta-t">Your District Needs You</h2>
+    <p class="fcta-s">Four days. Hundreds of dancers. One unforgettable weekend in Provo, Utah. Don't let someone else claim your spot on the floor.</p>
+    <div style="display:flex;gap:1.1rem;justify-content:center;flex-wrap:wrap">
+      <a href="https://www.danceplace.com/index/no/15853/Utah+Dance+Fest-2026-Orem_+UT-United+States-Country+Dance+event" target="_blank" class="btn-p">Claim Your Pass Now →</a>
+      <a href="tel:8015541876" class="btn-s">Call or Text Loretta at (330) 663-4310</a>
+    </div>
+    <p style="margin-top:1.8rem;font-size:.73rem;color:var(--muted)">September 17–20, 2026 &nbsp;·&nbsp; Provo, Utah &nbsp;·&nbsp; Organized by Ignite Country Fusion</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <!-- LOGO: swap the text span for an img when you have the file:
+       <img src="logo.png" alt="Utah Dance Fest" height="28"> -->
+  <div class="flogo">Utah Dance Fest · The 2026 Games</div>
+  <ul class="flinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#passes">Passes</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="https://www.instagram.com/utah_dancefest" target="_blank">Instagram</a></li>
+    <li><a href="https://www.danceplace.com/index/no/15853/Utah+Dance+Fest-2026-Orem_+UT-United+States-Country+Dance+event" target="_blank">Register</a></li>
+  </ul>
+  <p class="fcopy">© 2026 Utah Dance Fest · Ignite Country Fusion · Franz Lezama-Acharte · (801) 554-1876</p>
+</footer>
+
+<script>
+/* EMBER PARTICLES */
+const ec = document.getElementById('embers');
+for(let i = 0; i < 60; i++){
+  const e = document.createElement('div');
+  e.className = 'ember';
+  const sz = 1 + Math.random() * 4;
+  const hot = Math.random() > .45;
+  e.style.cssText = `left:${Math.random()*100}%;width:${sz}px;height:${sz}px;background:${hot?'#E8441A':'#C9A84C'};animation-duration:${3+Math.random()*8}s;animation-delay:${Math.random()*9}s;--dx:${(Math.random()-.5)*160}px;`;
+  ec.appendChild(e);
+}
+
+/* COUNTDOWN */
+function tick(){
+  const d = new Date('2026-09-17T16:00:00') - new Date();
+  if(d <= 0) return;
+  document.getElementById('cdd').textContent = String(Math.floor(d/86400000)).padStart(2,'0');
+  document.getElementById('cdh').textContent = String(Math.floor(d%86400000/3600000)).padStart(2,'0');
+  document.getElementById('cdm').textContent = String(Math.floor(d%3600000/60000)).padStart(2,'0');
+  document.getElementById('cds').textContent = String(Math.floor(d%60000/1000)).padStart(2,'0');
+}
+tick(); setInterval(tick, 1000);
+
+/* STICKY NAV */
+window.addEventListener('scroll', () => document.getElementById('nb').classList.toggle('scrolled', scrollY > 80));
+
+/* HAMBURGER MENU */
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileNav.classList.toggle('open');
+  document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+});
+function closeMobileNav(){
+  hamburger.classList.remove('open');
+  mobileNav.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* SCHEDULE TABS */
+function showDay(day, btn){
+  document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.spanel').forEach(p => p.classList.remove('active'));
+  document.getElementById('day-' + day).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ======================================================
+PASS SWIPER
+All Access (slide index 1) stays centered on load.
+Desktop = 3 visible | Tablet = 2 | Mobile = 1
+====================================================== */
+(function(){
+  const track   = document.getElementById('swInner');
+  const wrap    = document.getElementById('swTrack');
+  const btnPrev = document.getElementById('swPrev');
+  const btnNext = document.getElementById('swNext');
+  const dotsEl  = document.getElementById('swDots');
+  if(!track) return;
+
+  const slides = Array.from(track.children);
+  const TOTAL  = slides.length;
+  const GAP    = 22; // matches CSS gap 1.4rem
+  let current  = 0;
+  let startX   = 0;
+  let isDragging = false;
+
+  function getPerView(){
+    if(window.innerWidth <= 600) return 1;
+    if(window.innerWidth <= 900) return 2;
+    return 3;
+  }
+
+  function slideWidth(){
+    const pv = getPerView();
+    return (wrap.offsetWidth - GAP * (pv - 1)) / pv;
+  }
+
+  /* Force slides to exact width so 3 always fill the track */
+  function setSlideSizes(){
+    const sw = slideWidth();
+    slides.forEach(s => { s.style.flex = `0 0 ${sw}px`; });
+  }
+
+  /* Build dot per slide */
+  dotsEl.innerHTML = '';
+  slides.forEach((_,i)=>{
+    const d = document.createElement('button');
+    d.className = 'swiper-dot';
+    d.setAttribute('aria-label','Pass '+(i+1));
+    d.addEventListener('click',()=>goTo(i));
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(idx){
+    const pv  = getPerView();
+    const max = Math.max(0, TOTAL - pv);
+    current   = Math.max(0, Math.min(idx, max));
+    setSlideSizes();
+    const sw  = slideWidth();
+    track.style.transform = `translateX(-${current * (sw + GAP)}px)`;
+    dotsEl.querySelectorAll('.swiper-dot').forEach((d,i) => d.classList.toggle('active', i === current));
+    btnPrev.disabled = current === 0;
+    btnNext.disabled = current >= max;
+  }
+
+  btnPrev.addEventListener('click', ()=>goTo(current - 1));
+  btnNext.addEventListener('click', ()=>goTo(current + 1));
+
+  /* Touch / mouse drag */
+  wrap.addEventListener('mousedown',  e=>{ startX=e.clientX; isDragging=true; });
+  wrap.addEventListener('touchstart', e=>{ startX=e.touches[0].clientX; isDragging=true; },{passive:true});
+  window.addEventListener('mouseup',  e=>{ if(!isDragging)return; isDragging=false; if(Math.abs(e.clientX-startX)>40) goTo(e.clientX<startX?current+1:current-1); });
+  window.addEventListener('touchend', e=>{ if(!isDragging)return; isDragging=false; const dx=e.changedTouches[0].clientX-startX; if(Math.abs(dx)>40) goTo(dx<0?current+1:current-1); });
+
+  window.addEventListener('resize', ()=>goTo(current));
+
+  /* Start at index 0 — puts All Access (slide 1) in the center */
+  goTo(0);
+})();
+
+/* FAQ */
+function tFaq(btn){
+  const a = btn.nextElementSibling, open = a.classList.contains('open');
+  document.querySelectorAll('.faq-a').forEach(x => x.classList.remove('open'));
+  document.querySelectorAll('.faq-q').forEach(x => x.classList.remove('open'));
+  if(!open){ a.classList.add('open'); btn.classList.add('open'); }
+}
+</script>
+</body>
+</html>
